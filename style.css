@@ -102,6 +102,7 @@ a {
   font-family: 'Amatic SC', cursive;
   font-size: 26px;
   padding: 14px;
+  padding: 10px 40px
 }
 
 .btn1 {
@@ -136,14 +137,24 @@ a {
 //  border-radius: 10px;
   filter: alpha(opacity=40);  
 //  background-color: rgba(255, 255, 255, 0.9);
-  overflow-y: auto;
+//  overflow-y: auto;
   font-weight:bold;
 //  position: fixed;
-  left: 20;
-  top: 20;
+position: relative;
+//  left: 20px;
+  top: -40px;
   text-align: center;
-  width: 100%;
-  z-index: 10000;
+//  width: 100%;
+//  z-index: 10000;
+//  margin-top: -200px;
+}
+
+.myaccount{
+  background:#321321;
+  left:100px;
+  top:-40px;
+  height: 40px;
+  width: 40px;
 }
 
 .products {
