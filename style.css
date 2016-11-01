@@ -39,10 +39,53 @@ li {
   text-transform: uppercase;
 }
 
+table{
+  width: 100%;
+}
+
+tr {
+  padding: 0;
+  width: 90%;
+}
+
+th {
+  color: #14213D;
+  /*display: inline-block;*/
+  font-family: 'Abel', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  /*margin: 26px 20px;*/
+  text-transform: uppercase;
+}
+
 #logo {
   color: #FCA311;
   font-family: 'Amatic SC', cursive;
   font-size: 32px;
+  padding: 0px 50px;
+}
+
+#time{
+  color: #0040ff;
+  font-family: 'Abel', sans-serif;
+  font-size: 24px;
+  margin: 0px 0px 50px 0px;
+  padding: 0px 50px;
+}
+
+#sub_activity{
+  color: #A728B6;
+  font-family: 'Abel', sans-serif;
+  font-size: 24px;
+  margin: 0px 0px 50px 0px;
+  padding: 0px 50px;
+}
+
+#main_activity{
+  color: #ff0000;
+  font-family: 'Abel', sans-serif;
+  font-size: 24px;
+  margin: 0px 0px 50px 0px;
   padding: 0px 50px;
 }
 
@@ -174,6 +217,33 @@ position: relative;
   text-align: center;
   width: 45%;
 }
+
+.activities {
+  background: #EEEFF1;
+  box-sizing: border-box;
+  width: 90%;
+  margin: 20px auto;
+  padding: 20px 0px;
+/*  text-align: center;*/
+}
+
+.activity{
+  display: block;
+  margin: 0px 2% 80px 2%;
+  width: 90%;
+}
+
+/*.main_activity{
+  color: #14213D;
+  font-family: 'Abel', sans-serif;
+  font-size: 20px;
+}
+
+.sub_activity{
+  color: #FCA311;
+  font-family: 'Abel', sans-serif;
+  font-size: 20px;
+}*/
 
 .product img {
   width: 100%;
