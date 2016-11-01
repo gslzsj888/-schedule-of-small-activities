@@ -4,7 +4,7 @@ body {
   padding: 0;
 }
 
-
+a {color: inherit;}
 
 #cover {
   height: 900px;
@@ -87,6 +87,14 @@ th {
   font-size: 24px;
   margin: 0px 0px 50px 0px;
   padding: 0px 50px;
+}
+
+#delete_activity{
+  color: #BA4C04;
+  font-family: 'Abel', sans-serif;
+  font-size: 24px;
+  margin: 0px 0px 50px 0px;
+  padding: 0px 50px;  
 }
 
 .cover-content {
