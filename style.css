@@ -55,7 +55,9 @@ th {
   font-size: 16px;
   font-weight: 300;
   /*margin: 26px 20px;*/
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
+/*  list-style-image:url("img/star.gif");
+  list-style-type:square;*/
 }
 
 #logo {
@@ -71,6 +73,8 @@ th {
   font-size: 24px;
   margin: 0px 0px 50px 0px;
   padding: 0px 50px;
+  background-image: url("img/triangle.gif");
+  /*list-style-image:url("img/triangle.gif");*/
 }
 
 #sub_activity{
@@ -228,6 +232,15 @@ position: relative;
 
 .activities {
   background: #EEEFF1;
+  box-sizing: border-box;
+  width: 90%;
+  margin: 20px auto;
+  padding: 20px 0px;
+/*  text-align: center;*/
+}
+
+.activities1 {
+  background: #FCFBED;
   box-sizing: border-box;
   width: 90%;
   margin: 20px auto;
