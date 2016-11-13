@@ -55,7 +55,7 @@ class login(TemplateView):
      		username = req.POST.get('username','')
         	password = req.POST.get('passwd','')
         	repassword = req.POST.get('repasswd','')
-        	email = req.POST.get('email',0)
+        	email = req.POST.get('email','')
         	if((username == '') or (password == '') or (repassword == '') or (email == '')):
             	status = 'error'
         	elif(password!=repassword):
