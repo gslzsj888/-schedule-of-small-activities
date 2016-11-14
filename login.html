@@ -6,6 +6,25 @@
 		<title></title>
 		<script src="js/jquery-2.2.4.min.js"></script>
 		<script>
+			function submit(){
+				var loginUsername = $("#loginUsername")[0].value;
+				var loginPassword = $("#loginPassword")[0].value;
+				var signinUsername = $("#signinUsername")[0].value;
+				var signinPassword1 = $("#signinPassword1")[0].value;
+				var signinPassword2 = $("#signinPassword2")[0].value;
+
+				$.post("{url}", {
+					"loginUsername": loginUsername,
+					"loginPassword": loginPassword,
+					"signinUsername": signinUsername,
+					"signinPassword1": signinPassword1,
+					"signinPassword2": signinPassword2
+				},
+				function(data){
+
+				});
+			}
+			
 			$(document).ready(function() {
 				
 				$(".form").slideDown(500);
@@ -28,6 +47,10 @@
 					$("#registered-content").hide(500);
 				})
 			});
+
+
+		$("#loginBtn").click(submit());
+
 		</script>
 		<style>
 			* {
@@ -35,7 +58,9 @@
 				padding: 0;
 				font-family: "微软雅黑";
 			}
-			
+
+			a {color: inherit;}
+
 			body {
 				background: #F7F7F7;
 			}
@@ -181,22 +206,22 @@
 
 	<body>
 		<div class="form">
-			<div id="landing">Login</div>
-			<div id="registered">Sign In</div>
+			<div id="landing"><a href="#">Login</a></div>
+			<div id="registered"><a href="#">Sign In</a></div>
 			<div class="fix"></div>
 			<div id="landing-content">
 				<div id="photo"><img src="img/photo.png" /></div>
-				<div class="inp"><input type="text" placeholder="User Name" /></div>
-				<div class="inp"><input type="password" placeholder="Password" /></div>
-				<a href="index.html"><div class="login">Login</div></a>
+				<div class="inp" id="loginUsername"><input type="text" placeholder="User Name" /></div>
+				<div class="inp" id="loginPassword"><input type="password" placeholder="Password" /></div>
+				<div class="login" id="loginBtn"><a href="#">Login</a></div>
 				<div id="bottom"><span id="registeredtxt">Sign in</span><span id="forgotpassword">Forget Password</span></div>
 			</div>
 			<div id="registered-content">
-				<div class="inp"><input type="text" placeholder="User Name" /></div>
-				<div class="inp"><input type="password" placeholder="Password" /></div>
-				<div class="inp"><input type="password" placeholder="Confirm Password" /></div>
-				<div class="inp"><input type="text" placeholder="Email Address" /></div>
-				<a href="#"><div class="login" style="text-decoration: none">Sign In Now</div></a>
+				<div class="inp" id="signinUsername"><input type="text" placeholder="User Name" /></div>
+				<div class="inp" id="signinPassword1"><input type="password" placeholder="Password" /></div>
+				<div class="inp" id="signinPassword2"><input type="password" placeholder="Confirm Password" /></div>
+				<div class="inp" id="signinEmail"><input type="text" placeholder="Email Address" /></div>
+				<div class="login" style="text-decoration: none">Sign In Now</div>
 			</div>
 		</div>
 		<div style="text-align:center;">

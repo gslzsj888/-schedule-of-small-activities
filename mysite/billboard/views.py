@@ -6,10 +6,8 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views.generic import TemplateView
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils.decorators import method_decorator
-from datetime import datetime 
-from datetime import timedelta 
+import datetime
 
 # Create your views here.
 
@@ -39,10 +37,10 @@ def Combine_dict(dict1,dict2):
     return dict3
 
 class login(TemplateView):
-    template_name = "slogin.html"
+    template_name = "login.html"
     def get(self,req):
-        #if(req.user.is_authenticated()):
-            #return HttpResponseRedirect('/index/')
+        if(req.user.is_authenticated()):
+            return HttpResponseRedirect('/index/')
         status = ''
         content_extend={'status':status}
         content_base = GET_base(req)
@@ -61,7 +59,7 @@ class login(TemplateView):
             	return render_to_response(self.template_name,content,context_instance=RequestContext(req))
             else:
                 auth.login(req,user)
-            	return HttpResponseRedirect('/login/')
+            	return HttpResponseRedirect('/index/')
      	elif(req.POST.get('form_name','') == 'signup'):
             username = req.POST.get('username','')
             password = req.POST.get('passwd','')
@@ -96,7 +94,7 @@ class logout(TemplateView):
         return HttpResponseRedirect('/index/')
 
 class index(TemplateView):
-    template_name = "index.html"
+    template_name = "sindex.html"
     def get(self,req):
         newest_list = Activity.objects.order_by("-release")[0:4]
         popular_list = Activity.objects.order_by("-popular")[0:4]
@@ -106,15 +104,15 @@ class index(TemplateView):
         return render_to_response(self.template_name,content,context_instance=RequestContext(req))
     def post(self,req):
         if(req.POST.get('form_name','') == 'add_agenda'):
-            select_act = req.POST.get('select_id','')
+            select_act = req.POST.get('select_act','')
             try:
-                if(Agenda.objects.filter(activity__pk=select_act,user=req.user.myuser).Count()==0):
+                if(Agenda.objects.filter(activity__pk=select_act,overdue=0,user=req.user.myuser).count()==0):
                     newagenda=Agenda(
                         user = req.user.myuser,
-                        activity = Activity.object.get(pk=select_act)
+                        activity = Activity.objects.get(pk=select_act)
                         )
                     newagenda.save()
-                    activity=Activity.object.get(pk=select_act)
+                    activity=Activity.objects.get(pk=select_act)
                     activity.popular =activity.popular+1
                     activity.save()
                     status = 'success'
@@ -126,20 +124,22 @@ class index(TemplateView):
             content_base = POST_base(req)
             content=Combine_dict(content_base,content_extend)
             return render_to_response(self.template_name,content,context_instance=RequestContext(req))
+        elif(req.POST.get('form_name','') == 'view_act'):
+            view_id = req.POST.get('view_id','')
+            return HttpResponseRedirect('/activity/?view_id='+view_id)
 
 class activity(TemplateView):
-    template_name = "activity.html"
+    template_name = "sactivity.html"
     def get(self,req):
         view_act = req.GET.get('view_id','')
         if(view_act == ''):
             return HttpResponseRedirect('/index/')
         try:
             activity = Activity.objects.get(pk=view_act)
-            stage = activity.stage.all()
-            stage.sort(key=lambda x:x.id)
+            stage_list = Stage.objects.filter(activity=activity).order_by("id")
         except:
             return HttpResponseRedirect('/index/')
-        content_extend={'activity' : activity,'stage':stage}
+        content_extend={'activity' : activity,'stage_list':stage_list}
         content_base = GET_base(req)
         content=Combine_dict(content_base,content_extend)
         return render_to_response(self.template_name,content,context_instance=RequestContext(req))
@@ -147,7 +147,7 @@ class activity(TemplateView):
         if(req.POST.get('form_name','') == 'add_agenda'):
             select_act = req.POST.get('select_act','')
             try:
-                if(Agenda.objects.filter(activity__pk=select_act,user=req.user.myuser).count()==0):
+                if(Agenda.objects.filter(activity__pk=select_act,overdue=0,user=req.user.myuser).count()==0):
                     newagenda=Agenda(
                         user = req.user.myuser,
                         activity = Activity.object.get(pk=select_act)
@@ -163,44 +163,49 @@ class activity(TemplateView):
             content=Combine_dict(content_base,content_extend)
             return render_to_response(self.template_name,content,context_instance=RequestContext(req))
 
+
 class myactivity(TemplateView):
-    template_name = 'myactivity.html'
+    template_name = 'smyactivity.html'
     def get(self,req):
-        Agenda = Agenda.objects.filter(user=req.user.myuser,overdue=0,checked=0)
+        agenda = Agenda.objects.filter(user=req.user.myuser,overdue=0,checked=0)
         change_list = []
         today_agenda = []
         all_agenda = []
-        for i in Agenda:
-            if(i.pub_date<datetime.now.today()):
+        for i in agenda:
+            if(i.activity.pub_date<datetime.date.today()):
                 i.overdue=1
                 i.save()
             elif(i.activity.cancered==1):
                 change_list.append(i)
             else:
                 all_agenda.append(i)
-                if(i.pub_date == datetime.now.today()):
-                    stage = i.activity.stage.all()
-                    stage.sort(key=lambda x:x.id)
-                    today_agenda.append((i,stage))
+                if(i.activity.pub_date == datetime.date.today()):
+                    stage_list = Stage.objects.filter(activity=i.activity).order_by("id")
+                    for j in stage_list:
+                        today_agenda.append(j)
         content_extend={'change_list':change_list,'today_agenda':today_agenda,'all_agenda':all_agenda}
         content_base = GET_base(req)
         content=Combine_dict(content_base,content_extend)
         return render_to_response(self.template_name,content,context_instance=RequestContext(req))
     def post(self,req):
-        if(req.POST.get('form_name','') == 'delete'):
-            del_agenda = req.POST.get('del_agenda','')
+        if(req.POST.get('form_name','') == 'del_agenda'):
+            del_agenda = req.POST.get('del_id','')
             agenda = Agenda.objects.get(pk=del_agenda)
             agenda.overdue=1
             agenda.save()
+            agenda.activity.popular=agenda.activity.popular-1
+            return HttpResponseRedirect('/myactivity/')
 
 class postactivity(TemplateView):
-    template_name = 'postactivity.html'
+    template_name = 'spostactivity.html'
     def get(self,req):
         act_id = req.POST.get('activity_id','')
-        activity = Activity.objects.get(pk=act_id)
-        stage = activity.stage.all()
-        stage.sort(key=lambda x:x.id)
-        content_extend = {'activity':activity,'stage':stage}
+        if(act_id!=''):
+            activity = Activity.objects.get(pk=(int(act_id)))
+            stage_list = Stage.objects.filter(activity=activity).order_by("id")
+            content_extend = {'activity':activity,'activit_id':act_id,'stage_list':stage}
+        else:
+            content_extend = {'activit_id':act_id}
         content_base = GET_base(req)
         content=Combine_dict(content_base,content_extend)
         return render_to_response(self.template_name,content,context_instance=RequestContext(req))
@@ -212,6 +217,8 @@ class postactivity(TemplateView):
             time_start = req.POST.get('time_start','')
             time_end = req.POST.get('time_end','')
             img = req.FILES.get('img','')
+         #   if(img==''):
+          #      title="3333"
             try:
                 newact=Activity(
                     title=title,
@@ -224,18 +231,25 @@ class postactivity(TemplateView):
                     )
                 newact.save()
                 status = 'success'
+                content_extend = {'status':status,'activity':newact,'activity_id':newact.id,'user':req.user.username}
             except:
-                status = 'error'
-            content_extend = {'status':status,'activity':newact}
+                status = 'add_act_error'
+                content_extend = {'status':status}
             content_base = POST_base(req)
             content=Combine_dict(content_base,content_extend)
             return render_to_response(self.template_name,content,context_instance=RequestContext(req))
         elif(req.POST.get('form_name','') == 'add_stage'):
             act_id = req.POST.get('activity_id','')
+            if(act_id == ''):
+                status='no_activity'
+                content_extend = {'status':status}
+                content_base = POST_base(req)
+                content=Combine_dict(content_base,content_extend)
+                return render_to_response(self.template_name,content,context_instance=RequestContext(req))
             tim = req.POST.get('time','')
             brief = req.POST.get('brief','')
             subtitle = req.POST.get('subtitle','')
-            activity = Activity.objects.get(pk=act_id)
+            activity = Activity.objects.get(pk=(int(act_id)))
             try:
                 newstage=Stage(
                     subtitle=subtitle,
@@ -246,8 +260,9 @@ class postactivity(TemplateView):
                 newstage.save()
                 status='success'
             except:
-                status = 'error'
-            content_extend = {'status':status,'activity':newact}
+                status = 'add_stage_error'
+            stage_list = Stage.objects.filter(activity=activity).order_by("id")
+            content_extend = {'status':status,'activity':activity,'activity_id':act_id,'stage_list':stage_list}
             content_base = POST_base(req)
             content=Combine_dict(content_base,content_extend)
             return render_to_response(self.template_name,content,context_instance=RequestContext(req))

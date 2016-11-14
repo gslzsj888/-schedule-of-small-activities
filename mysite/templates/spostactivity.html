@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=unicode">
+<title>Insert title here</title>
+</head>
+	<body>
+				<form method="post" enctype="multipart/form-data"> {% csrf_token %} 
+				<input type="hidden" name="form_name" value="add_act"/><br/>
+				<input type="text" name="title"/>title<br/>
+      			<input type="text" name="introduce"/>intro<br/>
+      			<input type="text" name="pub_date"/>date<br/>
+                <input type="text" name="time_start"/>start<br/>
+                <input type="text" name="time_end"/>end<br/>
+    			<div class="form-group">
+    				<label for="exampleInputFile">add_pic</label>
+   		 			<input type="file" name="img"id="img"></div>
+    			<div class="form-group">
+     			<input type="submit" value="add_act"/>
+				</form>
+
+				<form method="post"> {% csrf_token %} 
+				<input type="hidden" name="form_name" value="add_stage"/><br/>
+				<input type="hidden" name="activity_id" value={{activity_id}}><br/>
+				<input type="text" name="time"/>time<br/>
+				<input type="text" name="subtitle"/>subtitle<br/>
+				<input type="text" name="brief"/>brief<br/>
+     			<input type="submit" value="add_stage"/>
+				</form>
+
+				
+				<div>user={{ user }}</div>
+				<div>id={{ activity_id }}</div>
+				<div>builder={{ activity.builder.user.username }}</div>
+				<div>tile={{ activity.title }}</div>
+				<div>intro={{ activity.introduce }}</div>
+				<div>date={{ activity.pub_date }}</div>
+				<div>start={{ activity.time_start }}</div>
+				<div>end={{ activity.time_end }}</div>
+				<div>release={{ activity.release }}</div>
+				<img src="/{{activity.img}}" alt="no photos" >
+                      
+				
+				<div>status={{ status }}</div>
+				<div>login={{ login_status }}</div>
+
+
+				{% for stage in stage_list %}
+					<div>subtitle={{ stage.subtitle }}</div>
+					<div>brief={{ stage.brief }}</div>
+					<div>time={{ stage.tim }}</div>
+				{% endfor %}
+	</body>
+</html>

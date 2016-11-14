@@ -1,12 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
+from PIL import Image
 
 
 # Create your models here.
 
 class MyUser(models.Model):
-	user = models.ForeignKey(settings.AUTH_USER_MODEL)
+	user = models.OneToOneField(settings.AUTH_USER_MODEL)
 	email = models.CharField(max_length=30)
 
 class Activity(models.Model):
@@ -15,9 +16,9 @@ class Activity(models.Model):
 	pub_date = models.DateField(max_length=20)
 	time_start = models.CharField(max_length=20)
 	time_end = models.CharField(max_length=20)
-	release = models.DateField(auto_now=True)
+	release = models.DateTimeField(auto_now_add=True)
 	introduce = models.TextField()
-	img = models.ImageField(upload_to="media/activity_pic/%Y-%m-%d")
+	img= models.ImageField(upload_to='media/activitypic/%Y/%m/%d', blank=True,null=True)
 	cancered = models.IntegerField(default=0)
 	popular = models.IntegerField(default=0)
 

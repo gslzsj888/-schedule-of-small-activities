@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=unicode">
+<title>Insert title here</title>
+</head>
+	<body>
+				
+				<div>status={{ status }}</div>
+				<div>login={{ login_status }}</div>
+
+				<div>id={{ activity.id }}</div>
+				<div>builder={{ activity.builder.user.username }}</div>
+				<div>tile={{ activity.title }}</div>
+				<div>intro={{ activity.introduce }}</div>
+				<div>date={{ activity.pub_date }}</div>
+				<div>start={{ activity.time_start }}</div>
+				<div>end={{ activity.time_end }}</div>
+				<div>release={{ activity.release }}</div>
+				<img src="/{{activity.img}}" alt="no photos" >
+                      
+				
+
+				{% for stage in stage_list %}
+					<div>subtitle={{ stage.subtitle }}</div>
+					<div>brief={{ stage.brief }}</div>
+					<div>time={{ stage.tim }}</div>
+				{% endfor %}
+
+
+				<form method="post"> {% csrf_token %} 
+				<input type="hidden" name="form_name" value="add_agenda"/><br/>
+				<input type="hidden" name="select_act" value={{activity.id}}><br/>        					 
+				<input type="submit" value="add_to_agenda"/>
+				</form>
+
+	</body>
+</html>
