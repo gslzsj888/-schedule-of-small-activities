@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title></title>
-		<script src="js/jquery-2.2.4.min.js"></script>
+		<script src="../static/js/jquery-2.2.4.min.js"></script>
 		<script>
 			$(document).ready(function() {
 				
@@ -185,16 +185,16 @@
 			<div id="registered">Sign In</div>
 			<div class="fix"></div>
 			<div id="landing-content">
-				<div id="photo"><img src="img/photo.png" /></div>
-				<div class="inp"><input type="text" placeholder="User Name" /></div>
-				<div class="inp"><input type="password" placeholder="Password" /></div>
+				<div id="photo"><img src="../media/img/photo.png" /></div>
+				<div class="inp"><input name="username" type="text" placeholder="User Name" /></div>
+				<div class="inp"><input name="passwd" type="password" placeholder="Password" /></div>
 				<a href="index.html"><div class="login">Login</div></a>
 				<div id="bottom"><span id="registeredtxt">Sign in</span><span id="forgotpassword">Forget Password</span></div>
 			</div>
 			<div id="registered-content">
-				<div class="inp"><input type="text" placeholder="User Name" /></div>
-				<div class="inp"><input type="password" placeholder="Password" /></div>
-				<div class="inp"><input type="password" placeholder="Confirm Password" /></div>
+				<div class="inp"><input name="username" type="text" placeholder="User Name" /></div>
+				<div class="inp"><input name="passwd" type="password" placeholder="Password" /></div>
+				<div class="inp"><input name="repasswd" type="password" placeholder="Confirm Password" /></div>
 				<div class="inp"><input type="text" placeholder="Email Address" /></div>
 				<a href="#"><div class="login" style="text-decoration: none">Sign In Now</div></a>
 			</div>

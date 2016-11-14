@@ -13,7 +13,7 @@ urlpatterns = [
     url(r'^index/$',views.index.as_view()),
     url(r'^login/$',views.login.as_view()),
     url(r'^postactivity/$',views.postactivity.as_view()),
-    url(r'^myactivities/$',views.myactivities.as_view()),
+    url(r'^myactivity/$',views.myactivity.as_view()),
     url(r'^activity/$',views.activity.as_view()),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIAS_PATH}),
 ]

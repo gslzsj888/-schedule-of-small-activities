@@ -11,7 +11,7 @@ a {color: inherit;}
   position: relative;
   top: -55px;
   width: 100%;
-  background-image:url("img/sakura.jpg");
+  background-image:url("../media/img/sakura.jpg");
 }
 
 .navigation {
