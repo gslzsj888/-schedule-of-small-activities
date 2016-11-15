@@ -1,0 +1,113 @@
+ <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="unicode" />
+  <title>Billboard</title>
+  <link href="https://fonts.googleapis.com/css?family=Abel|Amatic+SC|Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../static/style.css">
+<!--     <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" /> -->
+ </head>
+<body>
+
+  <div class="navigation">
+    <ul>
+      <li>
+        <a href="/index/">Index</a></li>
+        <a href="/myactivity/" >My Schedule</a>
+      </li>
+      <li id="logo">Billboard</li>
+      <li><a href="#">My Account</a></li>
+        <!-- <div class="myaccount">123</div> -->
+        <li><a href="/logout/">Logout</a></li>
+    </ul>
+  </div>
+
+
+  <div id="cover">
+    <div class="cover-content">
+      <h1>Make busy life easier</h1>
+      <h2>Look for interesting activities</h2>
+      <a href="#" class="btn">View All Activities</a>
+    </div>
+  </div>
+
+  <div class="products">
+    <h3 class="blue">Popular activities</h3>
+
+    <!-- 
+    <div class="product">
+     <a href="activity.html"><img src= "../media/img/tree.jpg"></a>
+      <h3>Tree Planting</h3>
+      <p>I'm a introduction. Yes I'm just a introduction and don't ask why I appear here cuz the programmer is so lazzzzy! Let me see ... well it seems like the programmer has almost reach the word number.</p>
+      <h4>7.12 6:00a.m.~ 4:00p.m.</h4>
+      <a href="#" class="btn">Add into my schedule</a>
+    </div>
+	-->
+	{% for activity in newest_list %}
+    <div class="product">
+      <a href="/activity/?view_id={{activity.id}}" ><img src="/{{activity.img}}" alt="no photos" ></a>
+      <h3>{{activity.title}}</h3>
+      <p>{{activity.introduce}}</p>
+      <p>{{activity.pub_date}}</p>
+      <h4>{{ activity.time_start }}--{{ activity.time_end }}</h4>
+      <!--<input type="hidden" name="username" value={{username}}/>-->
+      <a href="/index/?select_id={{activity.id}}" class="btn">Add into my schedule</a>
+    </div>
+	{% endfor %}
+
+
+    <div class="products">
+    <h3 class="blue">Newest Activies</h3>
+    
+    
+    {% for activity in newest_list %}
+    <div class="product">
+      <a href="/activity/?view_id={{activity.id}}" ><img src="/{{activity.img}}" alt="no photos" ></a>
+      <h3>{{activity.title}}</h3>
+      <p>{{activity.introduce}}</p>
+      <p>{{activity.pub_date}}</p>
+      <h4>{{ activity.time_start }}--{{ activity.time_end }}</h4>
+      <!--<input type="hidden" name="username" value={{username}}/>-->
+      <a href="/index/?select_id={{activity.id}}" class="btn">Add into my schedule</a>
+    </div>
+	{% endfor %}
+	<!--
+    <div class="product">
+      <a href="activity.html"><img src=".../media/img/1.jpg"></a>
+      <h3>Party for Students in Department of Computer Science</h3>
+      <p>Again don't ask me why I'm here again. Cuz the programmer can not come up with any new activites any longer!</p>
+      <h4>10.7 7:00p.m.~10:00p.m.</h4>
+      <a href="#" class="btn">Add into my schedule</a>
+    </div>
+
+    <div class="product">
+      <a href="activity.html"><img src=".../media/img/2.jpg"></a>
+      <h3>Maths-learning Lecture</h3>
+      <p>Again don't ask me why I'm here again. Cuz the programmer can not come up with any new activites any longer! Again don't ask me why I'm here again. Cuz the programmer can not come up with any new activites any longer!</p>
+      <h4>7.17 6:30p.m.~ 8:00p.m.</h4>
+      <a href="#" class="btn">Add into my schedule</a>
+    </div>
+
+    <div class="product">
+      <a href="activity.html"><img src=".../media/img/3.jpeg"></a>
+      <h3>Chinese-learning Lecture</h3>
+      <p>Again don't ask me why I'm here again. Cuz the programmer can not come up with any new activites any longer!</p>
+      <h4>7.17 6:30p.m.~ 8:00p.m.</h4>
+      <a href="#" class="btn">Add into my schedule</a>
+    </div>
+
+    <div class="product">
+      <a href="activity.html"><img src=".../media/img/4.jpg"></a>
+      <h3>Physics-learning Lecture</h3>
+      <p>Again don't ask me why I'm here again. Cuz the programmer can not come up with any new activites any longer!</p>
+      <h4>7.17 6:30p.m.~ 8:00p.m.</h4>
+      <a href="#" class="btn">Add into my schedule</a>
+    </div>
+  </div>
+  -->
+  <h3>All of the activities are released by users, our platform reserve the right</h3>
+  
+</body>
+</html> 
