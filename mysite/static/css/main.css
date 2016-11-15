@@ -1,5 +1,5 @@
 ﻿/*index*/
-.header {height:80px; width:100%; position:fixed;background:url(../images/header_bg.png);border-bottom:1px solid #ddd;z-index:999}
+.header {height:80px; width:100%; position:fixed;background:url(../../media/images/header_bg.png);border-bottom:1px solid #ddd;z-index:999}
 .wrap{width:1140px; margin:0 auto;}
 
 .top{ width:100%; margin-top:39px; position:absolute; z-index:1;}
@@ -13,7 +13,7 @@
 
 .nav li a{height:80px; width:100px; line-height:80px; color:#444;display:block;font-size:14px; text-align:center;}
 .nav li a.curr,.nav li a:hover{color:#fff;background:#389fea}
-.nav .m{position:relative; float:left; height:38px; background:url(../images/nav_li.gif) center 0 no-repeat;z-index:999;}
+.nav .m{position:relative; float:left; height:38px; background:url(../../media/images/nav_li.gif) center 0 no-repeat;z-index:999;}
 .nav h3{float:left; overflow:hidden; font-weight:normal}
 .nav h3 a{height:80px;}
 .nav .on h3 a{color:#fff;background:#389fea}
@@ -33,9 +33,9 @@
 .focusBox .pic li{width:100%;height:800px; display:block}
 .focusBox .pic li a{width:100%;height:800px; display:block}
 .focusBox .hd{width:100%;position:absolute;bottom:30px;text-align:center;font-size:0;z-index:99999}
-.focusBox .hd li{margin:0 3px;background:url(../images/dot.png) no-repeat 0 -17px;height:17px;overflow:hidden;width:17px;cursor:pointer;display:inline-block;*display:inline;zoom:1;_background:url(../images/dot8.png) no-repeat 0 -17px}
+.focusBox .hd li{margin:0 3px;background:url(../../media/images/dot.png) no-repeat 0 -17px;height:17px;overflow:hidden;width:17px;cursor:pointer;display:inline-block;*display:inline;zoom:1;_background:url(../images/dot8.png) no-repeat 0 -17px}
 .focusBox .hd .on{background-position:0 0}
-.focusBox .prev,.focusBox .next{width:40px;height:60px;margin:-60px 0 0;display:none;background:url(../images/ad_ctr.png) no-repeat 0 0;position:absolute;top:50%;z-index:10;cursor:pointer;text-indent:-9999px;filter:alpha(opacity=20);opacity:0.2}
+.focusBox .prev,.focusBox .next{width:40px;height:60px;margin:-60px 0 0;display:none;background:url(../../media/images/ad_ctr.png) no-repeat 0 0;position:absolute;top:50%;z-index:10;cursor:pointer;text-indent:-9999px;filter:alpha(opacity=20);opacity:0.2}
 .focusBox .prev{left:0}
 .focusBox .next{background-position:0 -60px;right:0}
 .focusBox .prev:hover,.focusBox .next:hover{filter:alpha(opacity=50) !important;opacity:0.5 !important}
@@ -73,7 +73,7 @@ border-left:1px solid #e7e7e7;border-right:1px solid #e7e7e7;border-bottom:1px s
 .manager li a:hover, .manager li a h3:hover, .manager li a span:hover{background:#389fea;color:#fff}
 
 
-.jj_list{height:187px;width:100%; background:url(../images/jj_bg.gif) right 0 no-repeat;}
+.jj_list{height:187px;width:100%; background:url(../../media/images/jj_bg.gif) right 0 no-repeat;}
 .jj_list .l_time{height:90px;width:145px;float:left; text-align:center;line-height:54px; color:#aaa;font-size:16px; font-family:arial}
 .jj_list .r_text{height:90px;width:620px;float:right;}
 .jj_list .r_text h2{font-size:20px;line-height:46px; font-weight:normal;margin-bottom:6px}
@@ -89,7 +89,7 @@ a.yuyue{display:blcok; float:right;width:120px; height:36px; border:1px solid #2
 .box_all{width:720px;height:320px;margin:200px auto 0px;background:#fff; box-shadow:0 0 10px #222}
 .login5{height:50px;padding:0 20px; background:#389fea; position:relative; }
 .login5 h2{width:400px;height:50px; float:left;display:block;font-size:20px; line-height:50px; color:#fff;}
-.login5 a{ background:url(../images/close.gif) 0px 0px no-repeat; float:right;display:block; width:30px; height:50px; cursor:pointer}
+.login5 a{ background:url(../../media/images/close.gif) 0px 0px no-repeat; float:right;display:block; width:30px; height:50px; cursor:pointer}
 .login51{padding:30px 25px;}
 .login5left{ float:left; width:340px; height:200px; font-size:14px;}
 .login5left1{ width:100%; height:54px; float:left; position:relative; display:block;}
@@ -116,7 +116,7 @@ a.yuyue{display:blcok; float:right;width:120px; height:36px; border:1px solid #2
 }
 
 .case_list li a em {
-    background: rgba(0, 0, 0, 0) url("../images/big.png") no-repeat scroll center 320px;
+    background: rgba(0, 0, 0, 0) url("../../media/images/big.png") no-repeat scroll center 320px;
     color: #fff;
     display: block;
     height: 260px;
@@ -125,5 +125,5 @@ a.yuyue{display:blcok; float:right;width:120px; height:36px; border:1px solid #2
     transition: opacity 0.3s ease-in 0s;
     width: 260px;}
 .case_list li a:hover em {
-    background: rgba(0, 0, 0, 0.3) url("../images/big.png") no-repeat scroll center center;
+    background: rgba(0, 0, 0, 0.3) url("../../media/images/big.png") no-repeat scroll center center;
     transition: all 0.2s ease 0s;}
