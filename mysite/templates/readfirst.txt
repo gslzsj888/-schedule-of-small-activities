@@ -1,0 +1,10 @@
+登录、注册：login
+主界面:iindex
+查看我所选的活动:myacitivity
+发布活动:postactivity
+查看我发布的活动：editactivities(要不也是日历？)
+编辑我发布的的活动：editactivity
+查看活动细节:activity
+活动列表:activitylist
+我的提醒:remindme
+（用户信息:userinfo）

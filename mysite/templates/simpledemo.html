@@ -1,0 +1,170 @@
+ <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="unicode" />
+  <title>Billboard</title>
+  <link href="https://fonts.googleapis.com/css?family=Abel|Amatic+SC|Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../static/style.css">
+<!--     <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" /> -->
+		<script src="../static/js/jquery-2.2.4.min.js"></script>
+		<script>
+			function mySubmitLogin(){
+				document.login.submit();
+			}
+			function mySubmitSignUp(){
+				document.signup.submit();
+			}
+			function menuFix(){
+			   var labelList = document.getElementById("forsetLink1");
+			   labelList.onmouseover=function(){
+				this.getElementsByTagName("ul")[0].style.display="block";
+			   }
+			   labelList.onmouseout=function(){
+				this.getElementsByTagName("ul")[0].style.display="none";
+			   }
+			}
+			window.onload = menuFix;
+		</script>
+ </head>
+<style type="text/css">
+
+
+</style>
+<body>
+
+
+<div class="topbar">
+	<div class="topbar-in">		
+		<div class="topbar-nav">
+			<div class="item item-menu" id="forsetLink1">
+				<a href="javascript:;" class="item-con setlink-keyword">
+					<i class="topbar-ico-menu"></i>
+				</a>
+				<ul class="topbar-menu" data-ui-mark="dropMenu">
+					<li>
+					<a class=tit href="" target=_blank>A1</a>
+					<a href="" target=_blank>a1</a>
+					<a href="" target=_blank>a2</a>
+					<a href="" target=_blank>a3</A>
+					</li>
+					<li>
+					<a class=tit href="" target=_blank>B2</a>
+					<a href="" target=_blank>b1</a> 
+					<a href="" target=_blank>b2</a>
+					<a href="" target=_blank>b3</A>
+					</li>
+					<li>
+					<a class=tit href="" target=_blank>C3</a>
+					<a href="" target=_blank>c1</a>
+					<a href="" target=_blank>c2</a>
+					<a href="" target=_blank>c3</a>
+					</li>
+					<li>
+					<a class=tit href="" target=_blank>D4</a>
+					<a href="" target=_blank>d1</a>
+					<a href="" target=_blank>d2</a>
+					<a href="" target=_blank>d3</a>
+					</li>
+					<li>
+					<a class=tit href="" target=_blank>E5</a>
+					<a href="" target=_blank>e1</a>
+					<a href="" target=_blank>e2</a>
+					<a href="" target=_blank>e3</a>
+					</li>
+				</ul>
+			</div>
+			<div id="forsetLink21" style="float:left">
+				<div class="item">
+					<a href="#" target="_blank" class="item-con active">Index</a>
+				</div>
+				<div class="item">
+					<a href="/myactivity/" target="_blank" class="item-con"><i class="topbar-ico-sy"></i>My Schedule</a>
+				</div>
+				<div class="item">
+					<a href="#" target="_blank" class="item-con"><i class="topbar-ico-yy"></i>Post Activity</a>
+				</div>
+			</div>
+			<div class="item item-app" id="forsetLink2">
+					<span> </span>
+				      	<form method="post"> {% csrf_token %} 
+					<li><input type="hidden" name="form_name" value="research"/></li>
+					<li><div class="inp"><input type="text" name="research" placeholder="keywords"/></div></li>
+					<li><div class="inp"><input type="submit" value="research"/></div></li>
+				</a>		
+			</div>
+		</div>
+				<div class="topbar-login" id="forsetLink32">
+			<a href="javascript:;" data-ui-mark="login" class="link setlink-keyword">login</a>
+			<a href="javascript:;" class="link-nickname setlink-keyword" data-ui-mark="nickname" style="display:none;"></a>
+			<span class="sep">|</span>
+			<a href="/logout/" class="link setlink-keyword" data-ui-mark="logout" target="_blank">logout</a>
+		</div>
+	</div>
+<!--
+</div>  <div class="navigation", id="menu">
+    <ul>
+      <li>
+        <a href="/index/">Index</a></li>
+        <a href="/myactivity/" >My Schedule</a>
+      </li>
+      <li id="logo">Billboard</li>
+      <li><a href="#">My Account</a></li>
+        <!-- <div class="myaccount">123</div>
+        <li><a href="/logout/">Logout</a></li>
+    </ul>
+  </div>
+-->
+<!--
+  <div id="cover">
+    <div class="cover-content">
+      <h1>Make busy life easier</h1>
+      <h2>Look for interesting activities</h2>
+      <a href="#" class="btn">View All Activities</a>
+    </div>
+  </div>
+-->
+  <div class="products">
+    <h3 class="blue">Popular activities</h3>
+
+
+    {% for activity in newest_list %}
+    <div class="product">
+      <a href="/activity/?view_id={{activity.id}}" ><img src="/{{activity.img}}" alt="no photos" ></a>
+      <h3>{{activity.title}}</h3>
+      <p>{{activity.introduce}}</p>
+      <p>{{activity.pub_date}}</p>
+      <h4>{{ activity.time_start }}--{{ activity.time_end }}</h4>
+      <!--<input type="hidden" name="username" value={{username}}/>-->
+      <a href="/index/?select_id={{activity.id}}" class="btn">Add into my schedule</a>
+    </div>
+	{% endfor %}
+
+
+    <div class="products">
+    <h3 class="blue">Newest Activies</h3>
+    
+    
+    {% for activity in newest_list %}
+    <div class="product">
+      <a href="/activity/?view_id={{activity.id}}" ><img src="/{{activity.img}}" alt="no photos" ></a>
+      <h3>{{activity.title}}</h3>
+      <p>{{activity.introduce}}</p>
+      <p>{{activity.pub_date}}</p>
+      <h4>{{ activity.time_start }}--{{ activity.time_end }}</h4>
+      <!--<input type="hidden" name="username" value={{username}}/>-->
+      <a href="/index/?select_id={{activity.id}}" class="btn">Add into my schedule</a>
+    </div>
+	{% endfor %}
+<div class='news_tag'>
+	<a href="http://www.iteye.com/blogs/tag/js">js</a>
+	<a href="http://www.iteye.com/blogs/tag/html%E6%A0%87%E7%AD%BE">html±êÇ©</a>
+	<a href="http://www.iteye.com/blogs/tag/%E7%A9%BA%E7%99%BD%E7%AC%A6">¿Õ°×·û</a>
+	<a href="http://www.iteye.com/blogs/tag/%E6%8D%A2%E8%A1%8C%E7%AC%A6">»»ÐÐ·û</a>&nbsp;
+</div>
+
+  <h3>All of the activities are released by users, our platform reserve the right</h3>
+  
+</body>
+</html> 

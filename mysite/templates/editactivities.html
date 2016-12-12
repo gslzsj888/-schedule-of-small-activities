@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="unicode" />
+  <title>post Activities' List</title>
+  <link href="https://fonts.googleapis.com/css?family=Abel|Amatic+SC|Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../static/style.css">
+<!--     <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" /> -->
+    
+</head>
+<body>
+
+  
+  <div class="navigation">
+    <ul>
+      <li>
+        <a href="/index/">Index</a></li>
+        <a href="/myactivity/" >My Schedule</a>
+      </li>
+      <li id="logo">Billboard</li>
+      <li><a href="#">My Account</a></li>
+        <!-- <div class="myaccount">123</div> -->
+        <li><a href="/logout/">Logout</a></li>
+    </ul>
+  </div>
+
+
+  <div id="cover">
+    <div class="cover-content">
+      <h1>Make busy life easier</h1>
+      <h2>Look for interesting activities</h2>
+      <a href="#" class="btn">View All Activities</a>
+    </div>
+  </div>
+<!-- <div class="activities1">
+    <h3 class="blue"><img src="../media/img/time.gif"/></h3>
+    <h3 class="blue">Activities' List</h3>
+
+    <table>
+    {% for stage in today_agenda %}
+    <tr>
+      <td id="time">{{ stage.tim }}</td>
+      <td id="sub_activity">
+	<img src="../media/img/star.gif" height="20" width="20" />
+		{{ stage.subtitle }}
+	</td>
+      <td id="main_activity">TREE PLANTING</td>
+    </tr>
+    {% endfor %}
+    </table>
+  </div>
+-->
+
+<div class="activities">
+    <h3 class="blue">Activities' List</h3>
+    <table>
+        
+    {% for i in activity %}
+    <div>
+	<tr>
+        <th id="time">{{i.activity.pub_date}}  {{ i.activity.time_start }}~{{ i.activity.time_end }}</th>
+        <th id="main_activity"><img src="../media/img/star.gif" height="20" width="20" />
+      	<th href="/activity/?view_id={{i.activity.id}}">{{ i.activity.title }}</a></th>
+	<th id="delete_activity"><a href="#"><img src="../media/img/x.gif" height="20" width="20" />Edit</a></th>
+        </tr>
+        <tr>
+	<div class='news_tag'>
+	<a href="#">js</a>
+	<a href="#">css</a>
+	<a href="#">html</a>
+	<a href="#">jsp</a>&nbsp;
+	</div>
+        </tr>
+    {% endfor %}
+</div>
+  <h3>All of the activities are released by users, our platform reserve the right</h3>
+  
+</body>
+</html> 

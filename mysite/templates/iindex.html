@@ -1,13 +1,14 @@
- <!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="unicode" />
+ <meta charset="unicode" />
   <title>Billboard</title>
   <link href="https://fonts.googleapis.com/css?family=Abel|Amatic+SC|Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="../static/style.css">
 <!--     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" type="text/css" /> -->
+
  </head>
 <body>
 
@@ -56,7 +57,7 @@
       <a href="/index/?select_id={{activity.id}}" class="btn">Add into my schedule</a>
     </div>
 	{% endfor %}
-
+</div>
 
     <div class="products">
     <h3 class="blue">Newest Activies</h3>
@@ -73,41 +74,47 @@
       <a href="/index/?select_id={{activity.id}}" class="btn">Add into my schedule</a>
     </div>
 	{% endfor %}
-	<!--
-    <div class="product">
-      <a href="activity.html"><img src=".../media/img/1.jpg"></a>
-      <h3>Party for Students in Department of Computer Science</h3>
-      <p>Again don't ask me why I'm here again. Cuz the programmer can not come up with any new activites any longer!</p>
-      <h4>10.7 7:00p.m.~10:00p.m.</h4>
-      <a href="#" class="btn">Add into my schedule</a>
-    </div>
-
-    <div class="product">
-      <a href="activity.html"><img src=".../media/img/2.jpg"></a>
-      <h3>Maths-learning Lecture</h3>
-      <p>Again don't ask me why I'm here again. Cuz the programmer can not come up with any new activites any longer! Again don't ask me why I'm here again. Cuz the programmer can not come up with any new activites any longer!</p>
-      <h4>7.17 6:30p.m.~ 8:00p.m.</h4>
-      <a href="#" class="btn">Add into my schedule</a>
-    </div>
-
-    <div class="product">
-      <a href="activity.html"><img src=".../media/img/3.jpeg"></a>
-      <h3>Chinese-learning Lecture</h3>
-      <p>Again don't ask me why I'm here again. Cuz the programmer can not come up with any new activites any longer!</p>
-      <h4>7.17 6:30p.m.~ 8:00p.m.</h4>
-      <a href="#" class="btn">Add into my schedule</a>
-    </div>
-
-    <div class="product">
-      <a href="activity.html"><img src=".../media/img/4.jpg"></a>
-      <h3>Physics-learning Lecture</h3>
-      <p>Again don't ask me why I'm here again. Cuz the programmer can not come up with any new activites any longer!</p>
-      <h4>7.17 6:30p.m.~ 8:00p.m.</h4>
-      <a href="#" class="btn">Add into my schedule</a>
-    </div>
-  </div>
-  -->
+     </div>
   <h3>All of the activities are released by users, our platform reserve the right</h3>
-  
+  <div class="reminds" style="display:none" id="remindme">
+	<div class="remind" id="delayremind" num={{delayremind}}>{{delayremind}}</div>
+	<div class="remind" id="changeremind" num={{changeremind}}>{{delayremind}}</div>
+	<div class="remind" id="comingremind" num={{comingremind}}>{{delayremind}}</div><!-- 1remind,0no-->
+  </div>
+
+
+    <script type="text/javascript">  
+function show_alert(){
+    var reminds = document.querySelector('.reminds'),
+		remindchil = [].slice.call(reminds.querySelectorAll('.remind'));
+    var b = new Array(3);
+    var i=0; 
+    remindchil.forEach(function(d, pos) {
+	 b[i]=d.getAttribute('number')||0,
+	 i=i+1
+	});
+    
+    if(b[0]==1){
+        alert('your remind \n activity delay');
+    }
+    if(b[1]==1){
+        alert('your remind \n activity change');
+    }
+    if(b[2]==1){
+        alert('your remind \n activity coming');
+    }
+    
+    var delayRM = document.getElementById("delayremind").getAttribute('num') || 0;
+    var delayRM1 = document.getElementById("delayremind").innerText;
+    if (delayRM == 1) {
+        alert('your remind \n activity delay!');
+    }
+    if (delayRM1 == 1) {
+        alert('your remind \n activity delay1!');
+    }
+}
+
+show_alert(); 
+</script>  
 </body>
 </html> 
