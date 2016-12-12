@@ -8,23 +8,46 @@
 <!--     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" type="text/css" /> -->
+	<script>
+        $(window).keydown(function (e) {
+            var curKey = e.which;
+            if (curKey == 13) {
+                $('#loginUsername').submit(); 
+            }
+        })
 
+      </script>
  </head>
 <body>
 
-  <div class="navigation">
-    <ul>
-      <li>
-        <a href="/index/">Index</a></li>
-        <a href="/myactivity/" >My Schedule</a>
-      </li>
-      <li id="logo">Billboard</li>
-      <li><a href="#">My Account</a></li>
-        <!-- <div class="myaccount">123</div> -->
-        <li><a href="/logout/">Logout</a></li>
-    </ul>
-  </div>
+ <div class="navigation">
+  <ul>
+    <li></li>
+    <li><a href="#">Index</a></li>
+    <li><a href="#">My Activites</a></li>
+    <li id="logo">[APP's Name]</li>
+    <li><a href="#">My Account</a></li>
+    <li><a href="#">Contact Us</a></li>
 
+  </ul>
+  <li><div class="inp" id="loginUsername"><input type="text" placeholder="Search Here" /></div></li>
+  <!--<li id="search"><a href>Search</a></li>-->
+  <ul>
+    <ul>
+      <li id="keyword1"><a href="">A1</a></li>
+      <li id="keyword2"><a href="">BB</a></li>
+      <li id="keyword3"><a href="">CC</a></li>
+      <li id="keyword4"><a href="">DD</a></li>
+      <li id="keyword5"><a href="">EEE</a></li>
+      <li id="keyword6"><a href="">FF</a></li>
+      <li id="keyword7"><a href="">GGG</a> </li>
+    </ul>
+
+  </ul>
+  <!--<a href>123</a>-->
+  <!--<div class="inp" id="loginPassword"><input type="password" placeholder="Password" /></div>-->
+  <!--<div class="login" id="loginBtn"><a href="#">Login</a></div>-->
+</div>
 
   <div id="cover">
     <div class="cover-content">
@@ -77,14 +100,14 @@
      </div>
   <h3>All of the activities are released by users, our platform reserve the right</h3>
   <div class="reminds" style="display:none" id="remindme">
-	<div class="remind" id="delayremind" num={{delayremind}}>{{delayremind}}</div>
+	<div class="remind" id="delayremind" num={{delayremind}}>1</div>
 	<div class="remind" id="changeremind" num={{changeremind}}>{{delayremind}}</div>
 	<div class="remind" id="comingremind" num={{comingremind}}>{{delayremind}}</div><!-- 1remind,0no-->
   </div>
 
 
     <script type="text/javascript">  
-function show_alert(){
+window.onload=function(){
     var reminds = document.querySelector('.reminds'),
 		remindchil = [].slice.call(reminds.querySelectorAll('.remind'));
     var b = new Array(3);
@@ -113,8 +136,6 @@ function show_alert(){
         alert('your remind \n activity delay1!');
     }
 }
-
-show_alert(); 
 </script>  
 </body>
 </html> 

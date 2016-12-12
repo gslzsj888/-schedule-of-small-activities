@@ -11,8 +11,8 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700|BioRhyme:400,700" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="../static/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="../static/common.css" />
-		<link rel="stylesheet" type="text/css" href="../static/style3.css" />
-    <!--[if IE]>
+    <link rel="stylesheet" type="text/css" href="../static/style3.css" />
+	<!--[if IE]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <script>document.documentElement.className = 'js';</script>
@@ -26,10 +26,17 @@
             }
         }
     </script>
-</head>
+<script>
+        $(window).keydown(function (e) {
+            var curKey = e.which;
+            if (curKey == 13) {
+                $('#loginUsername').submit(); 
+            }
+        })
+
+      </script>
+ </head>
 <body>
-
-
     <svg class="hidden">
         <defs>
             <symbol id="icon-arrow" viewBox="0 0 24 24">
@@ -47,19 +54,32 @@
             </symbol>
         </defs>
     </svg>
-    <header class="navigation">
-        <ul>
-            <li>
-                <a href="/index/">Index</a>
-            </li>
-            <li>
-                <a href="/myactivity/">My Schedule</a>
-            </li>
-            <li id="logo">Billboard</li>
-            <li><a href="#">My Account</a></li>
-            <!-- <div class="myaccount">123</div> -->
-            <li><a href="/logout/">Logout</a></li>
-        </ul>
+    <header class="navigation">  <ul>
+    <li></li>
+    <li><a href="#">Index</a></li>
+    <li><a href="#">My Activites</a></li>
+    <li id="logo">[APP's Name]</li>
+    <li><a href="#">My Account</a></li>
+    <li><a href="#">Contact Us</a></li>
+
+  </ul>
+  <li><div class="inp" id="loginUsername"><input type="text" placeholder="Search Here" /></div></li>
+  <!--<li id="search"><a href>Search</a></li>-->
+  <ul>
+    <ul>
+      <li id="keyword1"><a href="">A1</a></li>
+      <li id="keyword2"><a href="">BB</a></li>
+      <li id="keyword3"><a href="">CC</a></li>
+      <li id="keyword4"><a href="">DD</a></li>
+      <li id="keyword5"><a href="">EEE</a></li>
+      <li id="keyword6"><a href="">FF</a></li>
+      <li id="keyword7"><a href="">GGG</a> </li>
+    </ul>
+
+  </ul>
+  <!--<a href>123</a>-->
+  <!--<div class="inp" id="loginPassword"><input type="password" placeholder="Password" /></div>-->
+  <!--<div class="login" id="loginBtn"><a href="#">Login</a></div>-->
     </header>
     <div class="calendar-title-box">
         <div class="calendarTitle">

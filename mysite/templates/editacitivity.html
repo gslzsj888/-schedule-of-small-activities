@@ -61,23 +61,46 @@
 <link href="https://fonts.googleapis.com/css?family=Abel|Amatic+SC|Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
 
-</head>
+<script>
+        $(window).keydown(function (e) {
+            var curKey = e.which;
+            if (curKey == 13) {
+                $('#loginUsername').submit(); 
+            }
+        })
 
-
+      </script>
+ </head>
 <body>
 
-  <div class="navigation">
+ <div class="navigation">
+  <ul>
+    <li></li>
+    <li><a href="#">Index</a></li>
+    <li><a href="#">My Activites</a></li>
+    <li id="logo">[APP's Name]</li>
+    <li><a href="#">My Account</a></li>
+    <li><a href="#">Contact Us</a></li>
+
+  </ul>
+  <li><div class="inp" id="loginUsername"><input type="text" placeholder="Search Here" /></div></li>
+  <!--<li id="search"><a href>Search</a></li>-->
+  <ul>
     <ul>
-      <li>
-      	<a href="/index/">Index</a></li>
-      	<a href="/myactivity/" >My Schedule</a>
-      </li>
-      <li id="logo">Billboard</li>
-      <li><a href="#">My Account</a></li>
-        <!-- <div class="myaccount">123</div> -->
-        <li><a href="/logout/">Logout</a></li>
+      <li id="keyword1"><a href="">A1</a></li>
+      <li id="keyword2"><a href="">BB</a></li>
+      <li id="keyword3"><a href="">CC</a></li>
+      <li id="keyword4"><a href="">DD</a></li>
+      <li id="keyword5"><a href="">EEE</a></li>
+      <li id="keyword6"><a href="">FF</a></li>
+      <li id="keyword7"><a href="">GGG</a> </li>
     </ul>
-  </div>
+
+  </ul>
+  <!--<a href>123</a>-->
+  <!--<div class="inp" id="loginPassword"><input type="password" placeholder="Password" /></div>-->
+  <!--<div class="login" id="loginBtn"><a href="#">Login</a></div>-->
+</div>
   <div id="cover">
     <div class="cover-content">
       <h1>Make busy life easier</h1>
