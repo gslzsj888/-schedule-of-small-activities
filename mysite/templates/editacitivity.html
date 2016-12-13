@@ -12,48 +12,51 @@
 <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script> 
 <script src="../static/js/jquery.SuperSlide.2.1.1.js"></script>
     <script>
+        var total = 0;
+        window.onload=function(){
+            var objs = document.getElementById("nextBody").getElementsByName("Sub");
+            for (var i = 0; i < objs.length; i++) {
+                objs[i].id = "sub" + i;
+                total++;
+            }
+        }
+
+        function newstage() {
+            var newStage = document.getElementById("newStage");
+            var nextBody = document.getElementById("nextBody");
+            nextBody.style.display = 'none';
+            newStage.style.display = 'block';
+        }
         function Fix(id) {
+            var R = document.getElementById("newStages");
             var mainBody = document.getElementById("mainBody");
             var enquiry = document.getElementById("enquiry");
             var nextBody = document.getElementById("nextBody");
+            var newStage = document.getElementById("newStage");
             var aclist = document.getElementById("aclist");
             if (id == 'mainBody') {
                 document.getElementById("mainbodyform").submit();
                 if (enquiry.style.display == 'none') {
                     mainBody.style.display = 'none';
                     enquiry.style.display = 'block';
-                    if (nextBody.style.display == 'none') {
-                        nextBody.style.display = 'block';
-                    }
+                }
+                if (nextBody.style.display == 'none') {
+                    nextBody.style.display = 'block';
                 }
             } else if (id == 'enquiry') {
-                if (mainBody.style.display == 'none') {
+                if (enquiry.style.display == 'block') {
                     enquiry.style.display = 'none';
-                    mainBody.style.display = 'block';
                 }
-            } else if (id == 'nextBody') {
-                document.getElementById("nextBodyform").submit();
-                if (aclist.style.display == 'none') {
-                    nextBody.style.display = 'none';
-                    aclist.style.display = 'block';
-                }
-
+                ;
+            } else if (id == 'newStage') {
+                nextBody.style.display = 'none';
+                newStage.style.display = 'none';
+                R.removeChild("newStage");
+                var oDiv = document.createElement('div');
+                    oDiv.innerHTML = ' <div class="products" id="newStage" style="display:none;float:left;"><form method="post" id="nextBodyForm">{% csrf_token %}<div><input type="hidden" name="form_name" value="add_stage" /></div><div><input type="hidden" name="act_id" value={{act_id}}></div><div class="inp"><input type="text" name="time" placeholder="time" /></div><div class="inp"><input type="text" name="subtitle" placeholder="subtitle" /></div><div class="inp"><input type="text" name="brief" placeholder="brief" /></div><div class="inp"> <input type="button" value="add_stage"  onclick="Fix("newStage")" ;></div></form></div>';
+                R.appendChild(oDiv);
             } else {
-                if (nextBody.style.display == 'none') {
-                    mainBody.style.display = 'none';
-                    aclist.style.display = 'none';
-		    nextBody.innerHTML = '<form method="post" id="nextBodyForm">{% csrf_token %}<div><input type="hidden" name="form_name" value="add_stage" /></div>
-                                            <div><input type="hidden" name="activity_id" value={{activity_id}}></div>
-                                            <div class="inp"><input type="text" name="time" placeholder="time" /></div>
-                                            <div class="inp"><input type="text" name="subtitle" placeholder="subtitle" /></div>
-                                            <div class="inp"><input type="text" name="brief" placeholder="brief" /></div>
-                                            <div class="inp"><input type="submit" value="add_stage" /> </div>
-                                            <div class="inp">
-                                                <input type="button" value="add_stage"  onclick='Fix("nextBody")' ;>
-                                            </div>
-                                        </form>';
-		    nextBody.style.display = 'block';
-                }
+                ;
             }
         }
     </script>
@@ -76,56 +79,57 @@
  <div class="navigation">
   <ul>
     <li></li>
-    <li><a href="#">Index</a></li>
-    <li><a href="#">My Activites</a></li>
-    <li id="logo">[APP's Name]</li>
-    <li><a href="#">My Account</a></li>
-    <li><a href="#">Contact Us</a></li>
+    <li><a href="/index/">Index</a></li>
+    <li><a href="/myactivity/">My Agenda</a></li>
+    <li id="logo">Bill Board</li>
+    <li><a href="#">{{username}}</a></li>
+    <li><a href="/logout/">Logout</a></li>
 
   </ul>
-  <li><div class="inp" id="loginUsername"><input type="text" placeholder="Search Here" /></div></li>
-  <!--<li id="search"><a href>Search</a></li>-->
-  <ul>
     <ul>
-      <li id="keyword1"><a href="">A1</a></li>
-      <li id="keyword2"><a href="">BB</a></li>
-      <li id="keyword3"><a href="">CC</a></li>
-      <li id="keyword4"><a href="">DD</a></li>
-      <li id="keyword5"><a href="">EEE</a></li>
-      <li id="keyword6"><a href="">FF</a></li>
-      <li id="keyword7"><a href="">GGG</a> </li>
-    </ul>
-
+  <li><div class="inp" id="loginUsername"><input type="text" id="keyword" placeholder="Search Here" /></div></li>
+  <!--<li id="search"><a href>Search</a></li>-->
   </ul>
+    <ul>
+      {% for label in label_list %}
+        <li><a href="/activitylist/?label_id={{label.id}}">{{label.name}}</a></li>
+      {% endfor %}
+      
+      </ul>
   <!--<a href>123</a>-->
   <!--<div class="inp" id="loginPassword"><input type="password" placeholder="Password" /></div>-->
   <!--<div class="login" id="loginBtn"><a href="#">Login</a></div>-->
 </div>
+
+
+ 
   <div id="cover">
     <div class="cover-content">
       <h1>Make busy life easier</h1>
       <h2>Look for interesting activities</h2>
-      <a href="#" class="btn">View All Activities</a>
+      <a href="/activitylist/" class="btn">View All Activities</a>
     </div>
   </div>
+
   <div class="about_con">
         <div class="wrap">
            
             <div class="left">
                 <div class="tit">
                     Tree Planting
-                    <a href="/activity/?select_id={{activity.id}}" class="btn1">Add into my schdule</a>
+                    <a href="/editactivity/?del_act_id={{act_id}}" class="btn1">delete from my post</a>
                     <a href="/index/" class="btn2">Back to index</a>
                 </div>
             </div>
             <div class="right">
                 <div class="activities1">
-                    <div class="activities" align=center valign=middle>
+                    <div class="activities" id="Release" align=center valign=middle>
                                     <div class="products" id="mainBody">
                                         <h3 class="blue">{{title}}</h3>
                                         <form method="post" enctype="multipart/form-data" id="mainbodyform">
                                             {% csrf_token %}
-                                            <div><input type="hidden" name="form_name" value="add_act" /></div>
+                                            <div><input type="hidden" name="form_name" value="edit_act" /></div>
+                                            <div><input type="hidden" name="edit_act_id" value={{act_id}} ></div>
                                             <div class="inp"><input type="text" name="title" placeholder="title" /></div>
                                             <div class="inp"><input type="text" name="introduce" placeholder="intro" /></div>
                                             <div class="inp"><input type="text" name="pub_date" placeholder="date" /></div>
@@ -138,54 +142,59 @@
                                                     <div class="inp">
                                                         <input type="button" value="relese"  onclick='Fix("mainBody")' ;>
                                                     </div>
+                                                </div></div>
                                         </form>
                                      </div>
                                     <div class="products" id="enquiry" onclick='Fix("enquiry")' style="display:none;float:left;">
-                                            <div>user={{ user }}</div>
-                                            <div>id={{ activity_id }}</div>
                                             <div>builder={{ activity.builder.user.username }}</div>
-                                            <div>tile={{ activity.title }}</div>
+                                            <div>title={{ activity.title }}</div>
                                             <div>intro={{ activity.introduce }}</div>
                                             <div>date={{ activity.pub_date }}</div>
                                             <div>start={{ activity.time_start }}</div>
                                             <div>end={{ activity.time_end }}</div>
-                                            <div>release={{ activity.release }}</div>
                                             <img src="/{{activity.img}}" alt="no photos">
-                                            <div>status={{ status }}</div>
-                                            <div>login={{ login_status }}</div>
-                                            <p>click for editing</p>
                                     </div>
-                                    <div class="products" id="nextBody" style="display:none;float:left;">
+                            <div id="nextBody" style="display:none;float:left;">
+                            {% for stage in stage_list %}
+                                    <div class="products" name="sub" >
                                         <form method="post" id="nextBodyForm">
                                             {% csrf_token %}
-                                            <div><input type="hidden" name="form_name" value="add_stage" /></div>
-                                            <div><input type="hidden" name="activity_id" value={{activity_id}}></div>
+                                            <div><input type="hidden" name="form_name" value="edit_stage" /></div>
+                                            <div><input type="hidden" name="act_id" value={{act_id}}></div>
+                                            <div><input type="hidden" name="edit_stage_id" value={{stage.id}}></div>
                                             <div class="inp"><input type="text" name="time" placeholder="time" /></div>
                                             <div class="inp"><input type="text" name="subtitle" placeholder="subtitle" /></div>
                                             <div class="inp"><input type="text" name="brief" placeholder="brief" /></div>
                                             <div class="inp"><input type="submit" value="add_stage" /> </div>
                                             <div class="inp">
-                                                <input type="button" value="add_stage"  onclick='Fix("nextBody")' ;>
+                                                <input type="submit" value="edit_stage">
+                                            </div>
+                                        </form>
+                                        <a href="/editactivity/?del_stage_id={{stage.id}}" class="btn1">delete from my activity</a>
+                                    </div>
+                            {% endfor %}
+                            <div><input type="button" value="new_stage" onclick="newstage()"/>
+                            </div>
+                                <div id="newStages">
+                                    <div class="products" id="newStage" style="display:none;float:left;">
+                                        <form method="post" id="nextBodyForm">
+                                            {% csrf_token %}
+                                            <div><input type="hidden" name="form_name" value="add_stage" /></div>
+                                            <div><input type="hidden" name="act_id" value={{act_id}}></div>
+                                            <div class="inp"><input type="text" name="time" placeholder="time" /></div>
+                                            <div class="inp"><input type="text" name="subtitle" placeholder="subtitle" /></div>
+                                            <div class="inp"><input type="text" name="brief" placeholder="brief" /></div>
+                                            <div class="inp">
+                                                <input type="button" value="add_stage"  onclick='Fix("newStage")' ;>
                                             </div>
                                         </form>
                                     </div>
-                    <div class="activities" id="aclist" onclick='Fix("aclist")' style="display:none;float:left;">
-                            {% for stage in stage_list %}
-                            <div class="jj_list">
-                                <div class="l_time">{{stage.activity.pub_date}}  {{ stage.tim }}</div>
-                                <div class="r_text">
-                                    <h2><a href="jj_detail.html">{{stage.subtitle}}</a></h2>
-                                    {{stage.brief}}
-                                </div>
-                            </div>
-                            {% endfor %}
-                    </div>
-
+                              </div>
                     <div class="clear"></div>
                 </div>
     </div>
     </div>
-
-
+            </div>
+</div></div>
 </body>
 </html>

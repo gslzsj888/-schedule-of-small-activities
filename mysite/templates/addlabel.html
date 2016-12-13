@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=unicode">
+<title>Insert title here</title>
+</head>
+	<body>
+				<div>status={{ status }}</div>
+				<div>login={{ login_status }}</div>
+				 
+				 <form method="post" id="nextBodyForm">{% csrf_token %}
+				<input type="text" name="name"/>name<br/>
+     			<input type="submit" value="add_act"/>
+                </form>
+				{% for label in label_list %}
+      			<li><a href="/addlabel/?del_id={{label.id}}">{{label.name}}</a></li>
+      			{% endfor %}
+      
+
+	</body>
+</html>

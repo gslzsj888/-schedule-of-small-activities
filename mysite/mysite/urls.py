@@ -12,9 +12,13 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^index/$',views.index.as_view()),
     url(r'^login/$',views.login.as_view()),
+    url(r'^addlabel/$',views.addlabel.as_view()),
     url(r'^logout/$',views.logout.as_view()),
     url(r'^postactivity/$',views.postactivity.as_view()),
     url(r'^myactivity/$',views.myactivity.as_view()),
     url(r'^activity/$',views.activity.as_view()),
+    url(r'^activitylist/$',views.activitylist.as_view()),
+    url(r'^editactivity/$',views.editactivity.as_view()),
+    url(r'^editactivities/$',views.editactivities.as_view()),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIAS_PATH}),
 ]

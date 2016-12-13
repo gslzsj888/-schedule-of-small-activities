@@ -9,37 +9,33 @@
 				<div>status={{ status }}</div>
 				<div>login={{ login_status }}</div>
 				
-    			<label>today</label>
 
-				{% for stage in today_agenda %}
-					<div>title={{ stage.activity.title }}</div>
-					<div>subtitle={{ stage.subtitle }}</div>
-					<div>brief={{ stage.brief }}</div>
-					<div>time={{ stage.tim }}</div>
+
+				{% for dat in dat_list %}
+					<div>title={{ dat.title }}</div>
+					<div>useful={{ dat.useful }}</div>
+					<div>number={{ dat.number }}</div>
 				{% endfor %}
 
-				<label>all</label>
 
-				{% for i in all_agenda %}
-				<div>id={{ i.activity.id }}</div>
-				<div>builder={{ i.activity.builder.user.username }}</div>
-				<div>tile={{ i.activity.title }}</div>
-				<div>intro={{ i.activity.introduce }}</div>
-				<div>date={{ i.activity.pub_date }}</div>
-				<div>start={{ i.activity.time_start }}</div>
-				<div>end={{ i.activity.time_end }}</div>
-				<div>release={{ i.activity.release }}</div>
-				<img src="/{{i.activity.img}}" alt="no photos" >
-                      
-				
+				{% for day in days %}
+					<div>day</div>
+					{% for agenda in day %}
+						<div>title={{ agenda.activity.title }}</div>
+						<div>remark={{ agenda.remark }}</div>
+      					<li><a href='/myactivity/?del_id={{agenda.id}}'>del agenda</a></li>
 
-				<form method="post"> {% csrf_token %} 
-				<input type="hidden" name="form_name" value="del_agenda"/><br/>
-				<input type="hidden" name="del_id" value={{i.id}}><br/>        					 
-				<input type="submit" value="delete"/>
-				</form>
-
+						<form method="post"> {% csrf_token %} 
+							<input type="hidden" name="agenda_id" value={{agenda.id}}><br/> 
+							<input type="hidden" name="edit_remark" value="aaaaa"/><br/>        				
+							<input type="submit" value="edit remark"/>
+						</form>
+					{% endfor %}
 				{% endfor %}
+
+						<div>year={{ year }}</div>
+						<div>month={{ month }}</div>
+
 
 	</body>
 </html>

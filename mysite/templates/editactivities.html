@@ -24,25 +24,22 @@
  <div class="navigation">
   <ul>
     <li></li>
-    <li><a href="#">Index</a></li>
-    <li><a href="#">My Activites</a></li>
-    <li id="logo">[APP's Name]</li>
-    <li><a href="#">My Account</a></li>
-    <li><a href="#">Contact Us</a></li>
+    <li><a href="/index/">Index</a></li>
+    <li><a href="/myactivity/">My Agenda</a></li>
+    <li id="logo">Bill Board</li>
+    <li><a href="#">{{username}}</a></li>
+    <li><a href="/logout/">Logout</a></li>
 
   </ul>
-  <li><div class="inp" id="loginUsername"><input type="text" placeholder="Search Here" /></div></li>
+  <li><div class="inp" id="loginUsername"><input type="text" id="keyword" placeholder="Search Here" /></div></li>
   <!--<li id="search"><a href>Search</a></li>-->
   <ul>
     <ul>
-      <li id="keyword1"><a href="">A1</a></li>
-      <li id="keyword2"><a href="">BB</a></li>
-      <li id="keyword3"><a href="">CC</a></li>
-      <li id="keyword4"><a href="">DD</a></li>
-      <li id="keyword5"><a href="">EEE</a></li>
-      <li id="keyword6"><a href="">FF</a></li>
-      <li id="keyword7"><a href="">GGG</a> </li>
-    </ul>
+      {% for label in label_list %}
+        <li><a href="/activitylist/?label_id={{label.id}}">{{label.name}}</a></li>
+      {% endfor %}
+      
+      </ul>
 
   </ul>
   <!--<a href>123</a>-->
@@ -50,11 +47,13 @@
   <!--<div class="login" id="loginBtn"><a href="#">Login</a></div>-->
 </div>
 
+
+ 
   <div id="cover">
     <div class="cover-content">
       <h1>Make busy life easier</h1>
       <h2>Look for interesting activities</h2>
-      <a href="#" class="btn">View All Activities</a>
+      <a href="/activitylist/" class="btn">View All Activities</a>
     </div>
   </div>
 <!-- <div class="activities1">
@@ -80,13 +79,13 @@
     <h3 class="blue">Activities' List</h3>
     <table>
         
-    {% for i in activity %}
+    {% for i in activity_list %}
     <div>
 	<tr>
-        <th id="time">{{i.activity.pub_date}}  {{ i.activity.time_start }}~{{ i.activity.time_end }}</th>
+        <th id="time">{{i.pub_date}}  {{ i.time_start }}~{{ i.time_end }}</th>
         <th id="main_activity"><img src="../media/img/star.gif" height="20" width="20" />
-      	<th href="/activity/?view_id={{i.activity.id}}">{{ i.activity.title }}</a></th>
-	<th id="delete_activity"><a href="#"><img src="../media/img/x.gif" height="20" width="20" />Edit</a></th>
+      	<th href="/activity/?view_id={{i.id}}">{{ i.title }}</a></th>
+	<th id="delete_activity"><a href="/editactivity/?edit_id={{i.id}}"><img src="../media/img/x.gif" height="20" width="20" />Edit</a></th>
         </tr>
         <tr>
 	<div class='news_tag'>

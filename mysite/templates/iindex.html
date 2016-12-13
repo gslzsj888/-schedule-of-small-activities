@@ -1,141 +1,141 @@
  <!DOCTYPE html>
 <html>
 <head>
- <meta charset="unicode" />
-  <title>Billboard</title>
-  <link href="https://fonts.googleapis.com/css?family=Abel|Amatic+SC|Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="../static/style.css">
-<!--     <link href="css/bootstrap.css" rel="stylesheet" />
-    <link href="css/font-awesome.min.css" rel="stylesheet" />
-    <link href="css/style.css" rel="stylesheet" type="text/css" /> -->
-	<script>
+    <meta charset="unicode" />
+    <title>Billboard</title>
+    <link href="https://fonts.googleapis.com/css?family=Abel|Amatic+SC|Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+    <!--     <link href="css/bootstrap.css" rel="stylesheet" />
+        <link href="css/font-awesome.min.css" rel="stylesheet" />
+        <link href="css/style.css" rel="stylesheet" type="text/css" /> -->
+    <script>
         $(window).keydown(function (e) {
             var curKey = e.which;
             if (curKey == 13) {
-                $('#loginUsername').submit(); 
+                $('#loginUsername').submit();
             }
         })
 
-      </script>
- </head>
-<body>
+    </script>
+    <script type="text/javascript" src="http://libs.useso.com/js/jquery/1.7.2/jquery.min.js"></script>
+    <script src="../static/js/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/sweetalert.css">
+</head>
+    <body>
 
- <div class="navigation">
-  <ul>
-    <li></li>
-    <li><a href="#">Index</a></li>
-    <li><a href="#">My Activites</a></li>
-    <li id="logo">[APP's Name]</li>
-    <li><a href="#">My Account</a></li>
-    <li><a href="#">Contact Us</a></li>
+        <div class="navigation">
+            <ul>
+                <li></li>
+                <li><a href="/index/">Index</a></li>
+                <li><a href="/myactivity/">My Agenda</a></li>
+                <li id="logo">Bill Board</li>
+                <li><a href="#">{{username}}</a></li>
+                <li><a href="/logout/">Logout</a></li>
 
-  </ul>
-  <li><div class="inp" id="loginUsername"><input type="text" placeholder="Search Here" /></div></li>
-  <!--<li id="search"><a href>Search</a></li>-->
-  <ul>
-    <ul>
-      <li id="keyword1"><a href="">A1</a></li>
-      <li id="keyword2"><a href="">BB</a></li>
-      <li id="keyword3"><a href="">CC</a></li>
-      <li id="keyword4"><a href="">DD</a></li>
-      <li id="keyword5"><a href="">EEE</a></li>
-      <li id="keyword6"><a href="">FF</a></li>
-      <li id="keyword7"><a href="">GGG</a> </li>
-    </ul>
+            </ul>
+            <li><div class="inp" id="loginUsername"><input type="text" id="keyword" placeholder="Search Here" /></div></li>
+            <!--<li id="search"><a href>Search</a></li>-->
+            <ul>
+                <ul>
+                    {% for label in label_list %}
+                    <li><a href="/activitylist/?label_id={{label.id}}">{{label.name}}</a></li>
+                    {% endfor %}
 
-  </ul>
-  <!--<a href>123</a>-->
-  <!--<div class="inp" id="loginPassword"><input type="password" placeholder="Password" /></div>-->
-  <!--<div class="login" id="loginBtn"><a href="#">Login</a></div>-->
-</div>
+                </ul>
 
-  <div id="cover">
-    <div class="cover-content">
-      <h1>Make busy life easier</h1>
-      <h2>Look for interesting activities</h2>
-      <a href="#" class="btn">View All Activities</a>
-    </div>
-  </div>
+            </ul>
+            <!--<a href>123</a>-->
+            <!--<div class="inp" id="loginPassword"><input type="password" placeholder="Password" /></div>-->
+            <!--<div class="login" id="loginBtn"><a href="#">Login</a></div>-->
+        </div>
 
-  <div class="products">
-    <h3 class="blue">Popular activities</h3>
+        <div id="cover">
+            <div class="cover-content">
+                <h1>Make busy life easier</h1>
+                <h2>Look for interesting activities</h2>
+                <a href="/postactivity/" class="btn">Post Activity</a>
+            </div>
+        </div>
 
-    <!-- 
-    <div class="product">
-     <a href="activity.html"><img src= "../media/img/tree.jpg"></a>
-      <h3>Tree Planting</h3>
-      <p>I'm a introduction. Yes I'm just a introduction and don't ask why I appear here cuz the programmer is so lazzzzy! Let me see ... well it seems like the programmer has almost reach the word number.</p>
-      <h4>7.12 6:00a.m.~ 4:00p.m.</h4>
-      <a href="#" class="btn">Add into my schedule</a>
-    </div>
-	-->
-	{% for activity in newest_list %}
-    <div class="product">
-      <a href="/activity/?view_id={{activity.id}}" ><img src="/{{activity.img}}" alt="no photos" ></a>
-      <h3>{{activity.title}}</h3>
-      <p>{{activity.introduce}}</p>
-      <p>{{activity.pub_date}}</p>
-      <h4>{{ activity.time_start }}--{{ activity.time_end }}</h4>
-      <!--<input type="hidden" name="username" value={{username}}/>-->
-      <a href="/index/?select_id={{activity.id}}" class="btn">Add into my schedule</a>
-    </div>
-	{% endfor %}
-</div>
+        <div class="products">
+            <h3 class="blue">Popular activities</h3>
 
-    <div class="products">
-    <h3 class="blue">Newest Activies</h3>
-    
-    
-    {% for activity in newest_list %}
-    <div class="product">
-      <a href="/activity/?view_id={{activity.id}}" ><img src="/{{activity.img}}" alt="no photos" ></a>
-      <h3>{{activity.title}}</h3>
-      <p>{{activity.introduce}}</p>
-      <p>{{activity.pub_date}}</p>
-      <h4>{{ activity.time_start }}--{{ activity.time_end }}</h4>
-      <!--<input type="hidden" name="username" value={{username}}/>-->
-      <a href="/index/?select_id={{activity.id}}" class="btn">Add into my schedule</a>
-    </div>
-	{% endfor %}
-     </div>
-  <h3>All of the activities are released by users, our platform reserve the right</h3>
-  <div class="reminds" style="display:none" id="remindme">
-	<div class="remind" id="delayremind" num={{delayremind}}>1</div>
-	<div class="remind" id="changeremind" num={{changeremind}}>{{delayremind}}</div>
-	<div class="remind" id="comingremind" num={{comingremind}}>{{delayremind}}</div><!-- 1remind,0no-->
-  </div>
+            <!--
+            <div class="product">
+             <a href="activity.html"><img src= "../media/img/tree.jpg"></a>
+              <h3>Tree Planting</h3>
+              <p>I'm a introduction. Yes I'm just a introduction and don't ask why I appear here cuz the programmer is so lazzzzy! Let me see ... well it seems like the programmer has almost reach the word number.</p>
+              <h4>7.12 6:00a.m.~ 4:00p.m.</h4>
+              <a href="#" class="btn">Add into my schedule</a>
+            </div>
+            -->
+            {% for activity in popular_list %}
+            <div class="product">
+                <a href="/activity/?view_id={{activity.id}}"><img src="/{{activity.img}}" alt="no photos"></a>
+                <h3>{{activity.title}}</h3>
+                <p>{{activity.introduce}}</p>
+                <p>{{activity.pub_date}}</p>
+                <h4>{{ activity.time_start }}--{{ activity.time_end }}</h4>
+                <!--<input type="hidden" name="username" value={{username}}/>-->
+                <a href="/index/?select_id={{activity.id}}" class="btn">Add into my schedule</a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="products">
+            <h3 class="blue">Newest Activies</h3>
 
 
-    <script type="text/javascript">  
-window.onload=function(){
-    var reminds = document.querySelector('.reminds'),
-		remindchil = [].slice.call(reminds.querySelectorAll('.remind'));
-    var b = new Array(3);
-    var i=0; 
-    remindchil.forEach(function(d, pos) {
-	 b[i]=d.getAttribute('number')||0,
-	 i=i+1
+            {% for activity in newest_list %}
+            <div class="product">
+                <a href="/activity/?view_id={{activity.id}}"><img src="/{{activity.img}}" alt="no photos"></a>
+                <h3>{{activity.title}}</h3>
+                <p>{{activity.introduce}}</p>
+                <p>{{activity.pub_date}}</p>
+                <h4>{{ activity.time_start }}--{{ activity.time_end }}</h4>
+                <!--<input type="hidden" name="username" value={{username}}/>-->
+                <a href="/index/?select_id={{activity.id}}" class="btn">Add into my schedule</a>
+            </div>
+            {% endfor %}
+        </div>
+        <h3>All of the activities are released by users, our platform reserve the right</h3>
+
+        <div class="demo" style="display:none">
+            <div class="demo_5" id="deleteremind" num={{flag}}>
+                <button id="btnTest"></button>
+            </div>
+        </div>
+           
+        </div>
+        <script type="text/javascript">
+            window.onload=function(){
+            var delayRM = document.getElementById('deleteremind').getAttribute('num') || 0;
+            var delayRM1 = document.getElementById('deleteremind').innerText;
+            if (delayRM == 1) {
+                document.getElementById('btnTest').click();
+            }
+        }
+        </script> 
+
+        <script>
+$(function(){
+
+
+    $(".demo_5 button").click(function(){
+        var delayRM1 = document.getElementById('deleteremind').innerText;
+		swal({
+			title: "Activity Delete!!!",
+			text: '<a href="#">'+delayRM1+'</a><br/>close after 5seconds',
+			imageUrl: "../media/img/photo.png",
+			html: true,
+			timer: 5000,
+			showConfirmButton: false
+		});
 	});
-    
-    if(b[0]==1){
-        alert('your remind \n activity delay');
-    }
-    if(b[1]==1){
-        alert('your remind \n activity change');
-    }
-    if(b[2]==1){
-        alert('your remind \n activity coming');
-    }
-    
-    var delayRM = document.getElementById("delayremind").getAttribute('num') || 0;
-    var delayRM1 = document.getElementById("delayremind").innerText;
-    if (delayRM == 1) {
-        alert('your remind \n activity delay!');
-    }
-    if (delayRM1 == 1) {
-        alert('your remind \n activity delay1!');
-    }
-}
-</script>  
-</body>
+
+});
+        </script>
+
+
+    </body>
 </html> 

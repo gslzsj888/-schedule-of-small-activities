@@ -17,14 +17,17 @@ class Activity(models.Model):
 	time_start = models.CharField(max_length=20)
 	time_end = models.CharField(max_length=20)
 	release = models.DateTimeField(auto_now_add=True)
+	restrict = models.TextField()
 	introduce = models.TextField()
 	img= models.ImageField(upload_to='media/activitypic/%Y/%m/%d', blank=True,null=True)
 	cancered = models.IntegerField(default=0)
 	popular = models.IntegerField(default=0)
+	limit = models.IntegerField(default=100000000)
 
 class Agenda(models.Model):
 	user = models.ForeignKey(MyUser)
 	activity = models.ForeignKey(Activity)
+	remark = models.TextField()
 	checked = models.IntegerField(default=0)
 	overdue = models.IntegerField(default=0)
 
@@ -33,3 +36,14 @@ class Stage(models.Model):
 	brief = models.TextField()
 	tim = models.CharField(max_length=20)
 	activity = models.ForeignKey(Activity,related_name="stage")
+
+
+class Label(models.Model):
+	name = models.CharField(max_length=50)
+
+class Bt_L_A(models.Model):
+	label = models.ForeignKey(Label)
+	discard = models.IntegerField(default=0)
+	activity = models.ForeignKey(Activity)
+
+

@@ -15,71 +15,7 @@
    /**
     * 点击上个月图标触发
     */
-	function toPrevMonth() {
-        //////////////////////////////////提交前一月
-	    calendarEl = document.querySelector('.calendar'),
-		calendarDays = [].slice.call(calendarEl.children),
-		settings = {
-		    snow: true,
-		    tilt: false
-		},
-		bgEl = document.body,
-		defaultBgColor = bgEl.style.backgroundColor,
-		colortimeout,
-		contentEl = document.querySelector('.content'),
-		contents = contentEl.querySelectorAll('.content__block'),
-		backCtrl = contentEl.querySelector('.btn-back'),
-		contentNumber = contentEl.querySelector('.content__number'),
-		isMobile = mobilecheck();
-	    init();
-	}
 
-    /**
-     * 点击下个月图标触发
-     */
-	function toNextMonth() {
-        /////////////////////////////////提交后一天
-	    calendarEl = document.querySelector('.calendar'),
-		calendarDays = [].slice.call(calendarEl.children),
-		settings = {
-		    snow: true,
-		    tilt: false
-		},
-		bgEl = document.body,
-		defaultBgColor = bgEl.style.backgroundColor,
-		colortimeout,
-		contentEl = document.querySelector('.content'),
-		contents = contentEl.querySelectorAll('.content__block'),
-		backCtrl = contentEl.querySelector('.btn-back'),
-		contentNumber = contentEl.querySelector('.content__number'),
-		isMobile = mobilecheck();
-	    init();
-	}
-
-	function bindEvent() {
-	    var prevMonth = document.getElementById("prevMonth");
-	    var nextMonth = document.getElementById("nextMonth");
-	    addEvent(prevMonth, 'click', toPrevMonth);
-	    addEvent(nextMonth, 'click', toNextMonth);
-	}
-    /**
-     * 绑定事件
-     */
-	function addEvent(dom, eType, func) {
-	    if (dom.addEventListener) {  // DOM 2.0
-	        dom.addEventListener(eType, function (e) {
-	            func(e);
-	        });
-	    } else if (dom.attachEvent) {  // IE5+
-	        dom.attachEvent('on' + eType, function (e) {
-	            func(e);
-	        });
-	    } else {  // DOM 0
-	        dom['on' + eType] = function (e) {
-	            func(e);
-	        }
-	    }
-	}
 
 	// Helper vars and functions.
 	function extend( a, b ) {
@@ -700,8 +636,8 @@
 	var calendarEl = document.querySelector('.calendar'),
 		calendarDays = [].slice.call(calendarEl.children),
 		settings = {
-			snow: true,
-			tilt: false
+		    snow: true,
+		    tilt: false
 		},
 		bgEl = document.body,
 		defaultBgColor = bgEl.style.backgroundColor,
@@ -713,6 +649,7 @@
 		isMobile = mobilecheck();
 
 	function init() {
+
 		layout();
 	}
 
